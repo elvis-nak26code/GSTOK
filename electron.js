@@ -6,8 +6,8 @@ const require = createRequire(import.meta.url);
 import { app, BrowserWindow,ipcMain , dialog } from 'electron';
 
 // pour la mise a jour autuomatique
-const { autoUpdater } = require("electron-updater")
-const log = require("electron-log")
+import { autoUpdater } from "electron-updater";
+import log from "electron-log";
 
 app.commandLine.appendSwitch('high-dpi-support', '1'); // Active le support DPI
 app.commandLine.appendSwitch('force-device-scale-factor', '1'); // Force le facteur de zoom à 1 (100%)

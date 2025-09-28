@@ -10,7 +10,8 @@
     "build": "vite build",
     "start": "electron .",
     "pack": "npm run build && electron-builder --dir",
-    "dist": "npm run build && electron-builder"
+    "dist": "npm run build && electron-builder",
+    "postinstall": "electron-builder install-app-deps"
   },
   "main": "electron.js",
   "build": {
