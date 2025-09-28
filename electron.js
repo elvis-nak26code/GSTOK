@@ -3,7 +3,11 @@ import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 
 
-import { app, BrowserWindow,ipcMain } from 'electron';
+import { app, BrowserWindow,ipcMain , dialog } from 'electron';
+
+// pour la mise a jour autuomatique
+const { autoUpdater } = require("electron-updater")
+const log = require("electron-log")
 
 app.commandLine.appendSwitch('high-dpi-support', '1'); // Active le support DPI
 app.commandLine.appendSwitch('force-device-scale-factor', '1'); // Force le facteur de zoom à 1 (100%)
@@ -19,6 +23,11 @@ import { fileURLToPath } from 'url';
 // Ces lignes sont nécessaires pour __dirname en ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+
+// pour la mise a jour autuomatique
+log.transports.file.level = "info"
+autoUpdater.logger = log
 
 let mainWindow;
 
@@ -44,6 +53,25 @@ function createWindow() {
     },
   });
 
+  // événements autoUpdater
+  autoUpdater.on("update-available", () => {
+    log.info("Mise à jour trouvée, téléchargement...")
+  })
+  
+  autoUpdater.on("update-downloaded", () => {
+    dialog.showMessageBox({
+      type: "info",
+      buttons: ["Installer et redémarrer", "Plus tard"],
+      title: "Mise à jour disponible",
+      message: "Une mise à jour a été téléchargée.",
+      detail: "Voulez-vous redémarrer pour l’installer maintenant ?"
+    }).then(result => {
+      if (result.response === 0) {
+        autoUpdater.quitAndInstall()
+      }
+    })
+  })
+
 
    // Force le zoom à 100% au niveau de la fenêtre
   // mainWindow.webContents.setZoomFactor(1);
@@ -62,7 +90,12 @@ function createWindow() {
 
 }
 
-app.on('ready', createWindow);
+app.on('ready',()=>{
+  createWindow();
+  autoUpdater.checkForUpdatesAndNotify()
+} );
+
+
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
