@@ -1,13 +1,12 @@
 
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
-
-
 import { app , BrowserWindow , ipcMain , dialog } from 'electron';
 
 // pour la mise a jour autuomatique
-import { autoUpdater } from "electron-updater"
-// import log from "electron-log";
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+
+const { autoUpdater } = require("electron-updater");
+const log = require("electron-log");
 
 app.commandLine.appendSwitch('high-dpi-support', '1'); // Active le support DPI
 app.commandLine.appendSwitch('force-device-scale-factor', '1'); // Force le facteur de zoom à 1 (100%)
@@ -26,8 +25,8 @@ const __dirname = path.dirname(__filename);
 
 
 // pour la mise a jour autuomatique
-// log.transports.file.level = "info"
-// autoUpdater.logger = log
+log.transports.file.level = "info"
+autoUpdater.logger = log
 
 let mainWindow;
 
@@ -73,10 +72,6 @@ function createWindow() {
   })
 
 
-   // Force le zoom à 100% au niveau de la fenêtre
-  // mainWindow.webContents.setZoomFactor(1);
-  // mainWindow.webContents.setVisualZoomLevelLimits(1, 1);
-  // mainWindow.webContents.setLayoutZoomLevelLimits(0, 0);
  
   if (isDev) {
     mainWindow.loadURL('http://localhost:5173');
