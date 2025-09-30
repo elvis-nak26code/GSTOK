@@ -2,11 +2,11 @@
 import { app , BrowserWindow , ipcMain , dialog } from 'electron';
 
 // pour la mise a jour autuomatique
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
+// import { createRequire } from "module";
+// const require = createRequire(import.meta.url);
 
-const { autoUpdater } = require("electron-updater");
-const log = require("electron-log");
+// const { autoUpdater } = require("electron-updater");
+// const log = require("electron-log");
 
 app.commandLine.appendSwitch('high-dpi-support', '1'); // Active le support DPI
 app.commandLine.appendSwitch('force-device-scale-factor', '1'); // Force le facteur de zoom à 1 (100%)
@@ -25,8 +25,8 @@ const __dirname = path.dirname(__filename);
 
 
 // pour la mise a jour autuomatique
-log.transports.file.level = "info"
-autoUpdater.logger = log
+// log.transports.file.level = "info"
+// autoUpdater.logger = log
 
 let mainWindow;
 
@@ -53,23 +53,23 @@ function createWindow() {
   });
 
   // événements autoUpdater
-  autoUpdater.on("update-available", () => {
-    log.info("Mise à jour trouvée, téléchargement...")
-  })
+  // autoUpdater.on("update-available", () => {
+  //   log.info("Mise à jour trouvée, téléchargement...")
+  // })
   
-  autoUpdater.on("update-downloaded", () => {
-    dialog.showMessageBox({
-      type: "info",
-      buttons: ["Installer et redémarrer", "Plus tard"],
-      title: "Mise à jour disponible",
-      message: "Une mise à jour a été téléchargée.",
-      detail: "Voulez-vous redémarrer pour l’installer maintenant ?"
-    }).then(result => {
-      if (result.response === 0) {
-        autoUpdater.quitAndInstall()
-      }
-    })
-  })
+  // autoUpdater.on("update-downloaded", () => {
+  //   dialog.showMessageBox({
+  //     type: "info",
+  //     buttons: ["Installer et redémarrer", "Plus tard"],
+  //     title: "Mise à jour disponible",
+  //     message: "Une mise à jour a été téléchargée.",
+  //     detail: "Voulez-vous redémarrer pour l’installer maintenant ?"
+  //   }).then(result => {
+  //     if (result.response === 0) {
+  //       autoUpdater.quitAndInstall()
+  //     }
+  //   })
+  // })
 
 
  
