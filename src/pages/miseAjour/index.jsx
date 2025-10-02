@@ -16,7 +16,7 @@ export default function MiseAjour() {
     useEffect( () => {
         checkUpdate().then((result) => {
             // alert(JSON.stringify(result) );
-            if(result !== "v0.0.1"){
+            if(result !== "v0.0.2"){
                 setUpdateAvailable(true);
             }
           });
