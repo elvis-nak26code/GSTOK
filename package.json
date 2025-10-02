@@ -86,9 +86,9 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
-    "electron-log": "^5.4.3",
+   
     "electron-store": "^10.1.0",
-    "electron-updater": "^6.6.2",
+    
     "input-otp": "^1.4.2",
     "keytar": "^7.9.0",
     "lucide-react": "^0.535.0",

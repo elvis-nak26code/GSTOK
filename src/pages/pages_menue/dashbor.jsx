@@ -3,6 +3,7 @@ import Card_section from "./section-card"
 import Calandar from "./calandar"
 import {Button} from "@/components/ui/dach-aut/button"
 import { Link } from "react-router-dom"
+import MiseAjour from "../miseAjour"
 
 export default function Dashb() {
     return (
@@ -16,6 +17,7 @@ export default function Dashb() {
                     <Link to="hst"><Button className="h-[50px] min-w-[150px] font-extrabold text-[16px] rounded-[0] bg-purple-700 border border-white">Historique des ventes</Button></Link>
                     <Link to="fr"> <Button className="h-[50px] min-w-[150px] font-extrabold text-[16px] rounded-[0] bg-purple-700 border border-white">Enregistrer un fournisseur</Button></Link>
                     <Link to="cr"> <Button className="h-[50px] min-w-[150px] font-extrabold text-[16px] rounded-[0] bg-purple-700 border border-white">Liste des credits</Button></Link>
+                    <MiseAjour/>
   
                 </div>
                 <div className=" w-full min-h-[90%] flex overflow-hidden gap-3">
